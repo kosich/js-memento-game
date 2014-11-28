@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<script src="js/ColorRangeGenerator.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css" media="screen">
+			body > div {
+				display: inline-block;
+				height: 20px;
+				width: 20px;
+				float: left;
+				font-size: 10px;
+				color:transparent;
+			}
+			body > div:hover{
+				color:#000;
+				position:relative;
+				z-index:1;
+				box-shadow: 0 0 2px #000;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" charset="utf-8">
+			var r = "FF0000", g = "00FF00", b = "0000FF";
+			var length = 5;
+			colorRangeGenerator.settings.makelog = true;
+			var a = [].concat(colorRangeGenerator.generate(r, g, length), colorRangeGenerator.generate(g, b, length), colorRangeGenerator.generate(b, r, length));
+
+			var result = document.createDocumentFragment();
+			for (var i = 0, j = a.length; i < j; i++) {
+				
+				//except intersections
+				if (i!=0 && i%length==0)
+					continue;
+					
+				var div = document.createElement('div');
+				div.style.backgroundColor = a[i];
+				div.innerText = i;
+				result.appendChild(div);
+			}
+
+			document.body.appendChild(result);
+
+		</script>
+	</body>
+</html>
